@@ -4,7 +4,7 @@ import Header from './components/Header/Header';
 import ReviewSection from './components/MainSection/MainSection';
 export const ReviewContext = createContext()
 function App() {
-  const [store,setStore] = useState({appName:"myntra"})
+  const [store,setStore] = useState({appName:"myntra", sortBy:"newest"})
   return (
     <ReviewContext.Provider value={[store,setStore]}>
       <div style={{width:"80%", margin:"auto"}}>

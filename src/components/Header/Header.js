@@ -26,9 +26,9 @@ const Header = () => {
             <div style={{ display:"flex"}} >
                <div >
                   <p className="my-label">sorting</p>
-                  <select name="sortByTime" id="sortByTime">
-                     <option>Newest First</option>
-                     <option>Oldest First</option>
+                  <select onChange={(event)=>setStore({...store, sortBy:event.target.value})} name="sortByTime" id="sortByTime">
+                     <option value="newest">Newest First</option>
+                     <option value="oldest">Oldest First</option>
                   </select>
                </div>
 

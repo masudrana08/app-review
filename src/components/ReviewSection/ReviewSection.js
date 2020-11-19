@@ -4,7 +4,7 @@ import './ReviewSection.css'
 const jsonData = require("../../review.json")
 const ReviewSection = () => {
    const [store,setStore]=useContext(ReviewContext)
-   console.log(store)
+   console.log(store.sortBy)
    const filteredReview = jsonData.filter(data=>{
       return(
          store.searchKey?.length>0 ?
@@ -14,11 +14,14 @@ const ReviewSection = () => {
       )
    })
 
+   let sorted = store.sortBy == "newest" ? filteredReview.sort((first,second)=>Date.parse(first.reviewDate)-Date.parse(second.reviewDate)) 
+                : filteredReview.sort((first,second)=>Date.parse(second.reviewDate)-Date.parse(first.reviewDate))
+
    return (
       <div className="main-review-section">
          viewing 1-10 of {filteredReview.length} Reviews
          {
-            filteredReview.map(reviewData=>{
+            sorted.map(reviewData=>{
                return( 
                   <div key={reviewData.id}>
                      
