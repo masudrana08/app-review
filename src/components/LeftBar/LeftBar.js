@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { ReviewContext } from '../../App';
 import './LeftBar.css'
 const jsonData = require("../../review.json")
@@ -21,11 +21,15 @@ const LeftBar = () => {
          }
       }
    })
+
+
    return (
       <div className="leftbar-container">
          
             <input onChange={(event)=>setStore({...store, searchKey:event.target.value})} className="search-input" type="text" placeholder="search"/>
-            <input onChange={(event)=>setStore({...store, calenderDate:event.target.value})}  type="date"/>
+            <input value={store.calenderDate} onChange={(event)=>setStore({...store,calenderDate:event.target.value})}  type="date"/>
+            <p style={{cursor:"pointer"}} onClick={()=>setStore({...store,calenderDate:""})}>Clear Date</p>
+
             <div>
                <p>Filter by Rating</p>
                <div style={{display:"flex"}}>

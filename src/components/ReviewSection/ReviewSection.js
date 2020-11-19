@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ReviewContext } from '../../App';
 import './ReviewSection.css'
 const jsonData = require("../../review.json")
@@ -6,20 +6,13 @@ const ReviewSection = () => {
    const [store,setStore]=useContext(ReviewContext)
 
    const filteredReview = jsonData.filter(data=>{
-   //    store.calenderDate ?
-   //    new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
-   //    && data.appID.substring(4)==store.appName.toLowerCase() && store.searchKey?.length>0 ?
-   //       data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1 :""
-   // // :store.searchKey?.length>0 ?
-   // //    data.appID.substring(4)==store.appName.toLowerCase() 
-   // //    &&  data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1
-   // :data.appID.substring(4)==store.appName.toLowerCase() 
       return(
          store.calenderDate &&  store.searchKey?.length>0?
-            new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+               new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
                && data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1 
-            :  data.appID.substring(4)==store.appName.toLowerCase()
-            && 
+            :data.appID.substring(4)==store.appName.toLowerCase()
+
+            &&
             store.searchKey?.length>0 ? 
                data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1
                :data.appID.substring(4)==store.appName.toLowerCase()
@@ -31,12 +24,15 @@ const ReviewSection = () => {
 
    let sorted = store.sortBy == "newest" ? filteredReview.sort((first,second)=>Date.parse(first.reviewDate)-Date.parse(second.reviewDate)) 
                 : filteredReview.sort((first,second)=>Date.parse(second.reviewDate)-Date.parse(first.reviewDate))
-
+   const [page,setPage]=useState({start:1, end:10, currentPage:1})
+   const pageHandler = (event)=>{
+      setPage({start:(event.target.innerText-1)*10+1, end:event.target.innerText*10, currentPage:event.target.innerText})
+   }
    return (
       <div className="main-review-section">
-         viewing 1-10 of {filteredReview.length} Reviews
+         viewing {page.start}-{page.end>filteredReview.length ? filteredReview.length:page.end} of {filteredReview.length} Reviews
          {
-            sorted.map(reviewData=>{
+            sorted.slice(page.start,page.end+1).map(reviewData=>{
                return( 
                   <div key={reviewData.id}>
                      
@@ -99,6 +95,16 @@ const ReviewSection = () => {
                )
             })
          }
+         <div>
+            <span onClick={(event)=>setPage({...page,currentPage:page.currentPage-1})}>Prev</span>
+            <span onClick={event=>pageHandler(event)}>{Number(page.currentPage)+3<Math.ceil(filteredReview.length/10)?Number(page.currentPage):Math.ceil(filteredReview.length/10-4)} </span>
+            <span onClick={event=>pageHandler(event)}>{Number(page.currentPage)+3<Math.ceil(filteredReview.length/10)?Number(page.currentPage)+1:Math.ceil(filteredReview.length/10-3)} </span>
+            <span onClick={event=>pageHandler(event)}>{Number(page.currentPage)+3<Math.ceil(filteredReview.length/10)?Number(page.currentPage)+2:Math.ceil(filteredReview.length/10-2)} </span>
+            ...
+            <span onClick={event=>pageHandler(event)}>{Math.ceil(filteredReview.length/10-1)} </span>
+            <span onClick={event=>pageHandler(event)}>{Math.ceil(filteredReview.length/10)} </span>
+            <span onClick={(event)=>setPage({...page,currentPage:page.currentPage+1})}>Next</span>
+         </div>
       </div>
    );
 };
