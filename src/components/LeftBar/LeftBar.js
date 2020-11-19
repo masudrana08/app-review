@@ -25,7 +25,7 @@ const LeftBar = () => {
       <div className="leftbar-container">
          
             <input onChange={(event)=>setStore({...store, searchKey:event.target.value})} className="search-input" type="text" placeholder="search"/>
-            <input type="date"/>
+            <input onChange={(event)=>setStore({...store, calenderDate:event.target.value})}  type="date"/>
             <div>
                <p>Filter by Rating</p>
                <div style={{display:"flex"}}>

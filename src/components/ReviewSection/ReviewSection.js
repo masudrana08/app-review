@@ -4,13 +4,28 @@ import './ReviewSection.css'
 const jsonData = require("../../review.json")
 const ReviewSection = () => {
    const [store,setStore]=useContext(ReviewContext)
-   console.log(store.sortBy)
+
    const filteredReview = jsonData.filter(data=>{
+   //    store.calenderDate ?
+   //    new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+   //    && data.appID.substring(4)==store.appName.toLowerCase() && store.searchKey?.length>0 ?
+   //       data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1 :""
+   // // :store.searchKey?.length>0 ?
+   // //    data.appID.substring(4)==store.appName.toLowerCase() 
+   // //    &&  data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1
+   // :data.appID.substring(4)==store.appName.toLowerCase() 
       return(
-         store.searchKey?.length>0 ?
-            data.appID.substring(4)==store.appName.toLowerCase() 
-            &&  data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1
-         :data.appID.substring(4)==store.appName.toLowerCase() 
+         store.calenderDate &&  store.searchKey?.length>0?
+            new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+               && data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1 
+            :  data.appID.substring(4)==store.appName.toLowerCase()
+            && 
+            store.searchKey?.length>0 ? 
+               data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1
+               :data.appID.substring(4)==store.appName.toLowerCase()
+            && store.calenderDate ? new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+               :data.appID.substring(4)==store.appName.toLowerCase()
+           
       )
    })
 
