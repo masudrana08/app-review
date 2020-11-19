@@ -11,3 +11,16 @@
    margin:0;
    margin-left:10px;
 }
+.search-input{
+   display:block;
+   border: 1px solid lightgray;;
+   
+   padding:6px;
+   width:220px;
+   border-radius:5px;
+
+}
+.search-input:focus{
+   outline:1px solid lightblue;;
+
+}

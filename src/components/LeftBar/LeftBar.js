@@ -4,7 +4,7 @@ import './LeftBar.css'
 const jsonData = require("../../review.json")
 const LeftBar = () => {
    const [store,setStore] =useContext(ReviewContext)
-   
+
    let fiveStar=0, fourStar=0, threeStar=0, twoStar=0, oneStar=0;
    jsonData.forEach(data=>{
       if(store.appName.toLowerCase() == data.appID.substring(4)){
@@ -24,7 +24,7 @@ const LeftBar = () => {
    return (
       <div className="leftbar-container">
          
-            <input type="text" placeholder="search"/>
+            <input onChange={(event)=>setStore({...store, searchKey:event.target.value})} className="search-input" type="text" placeholder="search"/>
             <input type="date"/>
             <div>
                <p>Filter by Rating</p>

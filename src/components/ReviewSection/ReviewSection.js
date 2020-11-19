@@ -1,19 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ReviewContext } from '../../App';
 import './ReviewSection.css'
 const jsonData = require("../../review.json")
 const ReviewSection = () => {
-   const [store]=useContext(ReviewContext)
-   const filteredReview = jsonData.filter(data=>data.appID.substring(4)==store.appName.toLowerCase())
-   console.log(filteredReview.length)
-   
+   const [store,setStore]=useContext(ReviewContext)
+   console.log(store)
+   const filteredReview = jsonData.filter(data=>{
+      return(
+         store.searchKey?.length>0 ?
+            data.appID.substring(4)==store.appName.toLowerCase() 
+            &&  data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1
+         :data.appID.substring(4)==store.appName.toLowerCase() 
+      )
+   })
+
    return (
       <div className="main-review-section">
+         viewing 1-10 of {filteredReview.length} Reviews
          {
             filteredReview.map(reviewData=>{
                return( 
                   <div key={reviewData.id}>
-                     viewing 1-10 of {filteredReview.length} Reviews
+                     
                      <div style={{display:"flex"}}>
                         <h3 style={{margin:0, padding:0}}>{reviewData.reviewHeading}</h3>
                         {
