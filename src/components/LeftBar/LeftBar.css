@@ -1,0 +1,13 @@
+.checked{
+   color:orange;
+   margin-left:4px;
+}
+.unchecked{
+   color:rgba(105, 101, 101, 0.548);
+   margin-left:4px;
+}
+.star-count{
+   padding:0;
+   margin:0;
+   margin-left:10px;
+}

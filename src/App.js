@@ -1,24 +1,17 @@
-import logo from './logo.svg';
+import React, { createContext, useState } from 'react';
 import './App.css';
-
+import Header from './components/Header/Header';
+import ReviewSection from './components/MainSection/MainSection';
+export const ReviewContext = createContext()
 function App() {
+  const [store,setStore] = useState({appName:"myntra"})
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ReviewContext.Provider value={[store,setStore]}>
+      <div style={{width:"80%", margin:"auto"}}>
+        <Header></Header>
+        <ReviewSection></ReviewSection>
+      </div>
+    </ReviewContext.Provider>
   );
 }
 
