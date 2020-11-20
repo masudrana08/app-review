@@ -101,6 +101,7 @@ const LeftBar = () => {
                   </div>
                   <p className="star-count">{oneStar}</p>
                </div>
+               
             </div>
 
             <div>
