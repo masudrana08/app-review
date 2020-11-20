@@ -1,10 +1,12 @@
 .checked{
    color:orange;
-   margin-left:4px;
+   margin:0 4px;
+   padding:0;
 }
 .unchecked{
    color:rgba(105, 101, 101, 0.548);
-   margin-left:4px;
+   margin:0 4px;
+   padding:0;
 }
 .star-count{
    padding:0;
@@ -15,7 +17,7 @@
    display:block;
    border: 1px solid lightgray;;
    
-   padding:6px;
+   padding:6px 3px;
    width:220px;
    border-radius:5px;
 
@@ -31,7 +33,7 @@
    border-radius: 5px;
    padding: 5px; 
    width: 220px;
-   margin-top: 10px;
+   margin-top: 5px;
    color: rgb(65, 64, 64);
    font-weight: 500;
    outline: none;
@@ -50,4 +52,31 @@
    display:flex;
    align-items: center;
    
+}
+
+.small-p{
+   margin:0;
+   padding:0;
+   font-size: 14px;
+   cursor: pointer;
+   width: 100px;
+   border-radius: 30px;
+   padding-left: 10px;
+   color:rgb(68, 67, 67);
+   letter-spacing: 1.2px;
+}
+
+.small-p:hover{
+   background: rgba(155, 153, 153, 0.315);
+   border-radius: 30px;
+   padding-left: 10px;
+   
+}
+
+.filter-title{
+   margin:5px 0 0 0;
+   padding:0;
+   font-size:15px;
+   font-weight: bold;
+   color: rgb(128, 126, 126);
 }
