@@ -47,7 +47,7 @@ const LeftBar = () => {
       {/* start rating filter */}
             <div>
                <p className="filter-title">Filter by Rating</p>
-               <div style={{display:"flex"}}>
+               <div className="rating-star">
                   <div onClick={event=>setStore({...store, star:5})}>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star checked"></span>
@@ -58,7 +58,7 @@ const LeftBar = () => {
                   <p className="star-count">{fiveStar}</p>
                </div>
                
-               <div style={{display:"flex"}}>
+               <div className="rating-star">
                   <div onClick={event=>setStore({...store, star:4})}>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star checked"></span>
@@ -69,7 +69,7 @@ const LeftBar = () => {
                   <p className="star-count">{fourStar}</p>
                </div>
                
-               <div style={{display:"flex"}}>
+               <div className="rating-star">
                   <div onClick={event=>setStore({...store, star:3})}>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star checked"></span>
@@ -80,7 +80,7 @@ const LeftBar = () => {
                   <p className="star-count">{threeStar}</p>
                </div>
                
-               <div style={{display:"flex"}}>
+               <div className="rating-star">
                   <div onClick={event=>setStore({...store, star:2})}>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star checked"></span>
@@ -91,7 +91,7 @@ const LeftBar = () => {
                   <p className="star-count">{twoStar}</p>
                </div>
                
-               <div style={{display:"flex"}}>
+               <div className="rating-star">
                   <div onClick={event=>setStore({...store, star:1})}>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star unchecked"></span>

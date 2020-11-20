@@ -80,3 +80,7 @@
    font-weight: bold;
    color: rgb(128, 126, 126);
 }
+.rating-star{
+   display:flex;
+   cursor: pointer;
+}
