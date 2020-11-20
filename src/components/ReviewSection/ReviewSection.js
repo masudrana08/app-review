@@ -24,15 +24,20 @@ const ReviewSection = () => {
 
    let sorted = store.sortBy == "newest" ? filteredReview.sort((first,second)=>Date.parse(first.reviewDate)-Date.parse(second.reviewDate)) 
                 : filteredReview.sort((first,second)=>Date.parse(second.reviewDate)-Date.parse(first.reviewDate))
-   const [page,setPage]=useState({start:1, end:10, currentPage:1})
+   const [page,setPage]=useState({start:1, end:10})
+   const [currentPage,setCurrentPage]=useState(1)
    const pageHandler = (event)=>{
-      setPage({start:(event.target.innerText-1)*10+1, end:event.target.innerText*10, currentPage:event.target.innerText})
+      
+      event.target?.innerText? setCurrentPage(Number(event.target.innerText))
+      : setCurrentPage(event)
    }
    return (
       <div className="main-review-section">
-         viewing {page.start}-{page.end>filteredReview.length ? filteredReview.length:page.end} of {filteredReview.length} Reviews
+         viewing {(currentPage-1)*10+1}-{currentPage*10<filteredReview.length?currentPage*10:filteredReview.length} of {filteredReview.length} Reviews
          {
-            sorted.slice(page.start,page.end+1).map(reviewData=>{
+            sorted.slice(
+               (currentPage-1)*10+1,currentPage*10
+            ).map(reviewData=>{
                return( 
                   <div key={reviewData.id}>
                      
@@ -96,14 +101,14 @@ const ReviewSection = () => {
             })
          }
          <div>
-            <span onClick={(event)=>setPage({...page,currentPage:page.currentPage-1})}>Prev</span>
-            <span onClick={event=>pageHandler(event)}>{Number(page.currentPage)+3<Math.ceil(filteredReview.length/10)?Number(page.currentPage):Math.ceil(filteredReview.length/10-4)} </span>
-            <span onClick={event=>pageHandler(event)}>{Number(page.currentPage)+3<Math.ceil(filteredReview.length/10)?Number(page.currentPage)+1:Math.ceil(filteredReview.length/10-3)} </span>
-            <span onClick={event=>pageHandler(event)}>{Number(page.currentPage)+3<Math.ceil(filteredReview.length/10)?Number(page.currentPage)+2:Math.ceil(filteredReview.length/10-2)} </span>
+            <span onClick={(event)=>pageHandler(currentPage-1)}>Prev</span>
+            <span onClick={event=>pageHandler(event)}>{Number(currentPage)+3<Math.ceil(filteredReview.length/10)?Number(currentPage):Math.ceil(filteredReview.length/10-4)} </span>
+            <span onClick={event=>pageHandler(event)}>{Number(currentPage)+3<Math.ceil(filteredReview.length/10)?Number(currentPage)+1:Math.ceil(filteredReview.length/10-3)} </span>
+            <span onClick={event=>pageHandler(event)}>{Number(currentPage)+3<Math.ceil(filteredReview.length/10)?Number(currentPage)+2:Math.ceil(filteredReview.length/10-2)} </span>
             ...
             <span onClick={event=>pageHandler(event)}>{Math.ceil(filteredReview.length/10-1)} </span>
             <span onClick={event=>pageHandler(event)}>{Math.ceil(filteredReview.length/10)} </span>
-            <span onClick={(event)=>setPage({...page,currentPage:page.currentPage+1})}>Next</span>
+            <span onClick={(event)=>pageHandler(currentPage+1)}>Next</span>
          </div>
       </div>
    );
