@@ -3,9 +3,11 @@ import { ReviewContext } from '../../App';
 import './ReviewSection.css'
 const jsonData = require("../../review.json")
 const ReviewSection = () => {
+   const [currentPage,setCurrentPage]=useState(1)
    const [store,setStore]=useContext(ReviewContext)
 
    const filteredReview = jsonData.filter(data=>{
+      
       return(
          store.calenderDate &&  store.searchKey?.length>0?
             new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
@@ -23,14 +25,15 @@ const ReviewSection = () => {
       )
    })
 
-   let sorted = store.sortBy == "newest" ? filteredReview.sort((first,second)=>Date.parse(first.reviewDate)-Date.parse(second.reviewDate)) 
+   let sorted = store.sortBy == "newest" 
+         ? filteredReview.sort((first,second)=>Date.parse(first.reviewDate)-Date.parse(second.reviewDate)) 
          : filteredReview.sort((first,second)=>Date.parse(second.reviewDate)-Date.parse(first.reviewDate))
-   const [page,setPage]=useState({start:1, end:10})
-   const [currentPage,setCurrentPage]=useState(1)
+
+   
    const pageHandler = (event)=>{
-      
-      event.target?.innerText? setCurrentPage(Number(event.target.innerText))
-      : setCurrentPage(event)
+      event.target?.innerText && event.target?.innerText>0 && event.target?.innerText<=Math.ceil(filteredReview.length/10)
+      ? setCurrentPage(Number(event.target.innerText))
+      : event > 0 && event<=Math.ceil(filteredReview.length/10) && setCurrentPage(event)
    }
    return (
       <div className="main-review-section">

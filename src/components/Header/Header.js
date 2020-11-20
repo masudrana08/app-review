@@ -7,17 +7,21 @@ const Header = () => {
    const [store,setStore]=useContext(ReviewContext)
    const apps =[]
    jsonData.map(reviewData=>{           
-      if(!apps.includes(reviewData.appID)){
+      if ( !apps.includes(reviewData.appID) ) {
          apps.push(reviewData.appID)
       }
    })
    return (
       <div className="header-container">
+
          <div >
             <p className="my-label">select products</p>
             <select onChange={(event)=>setStore({...store, appName:event.target.value})} name="appName" id="appName">
                {
-                  apps.map((app,index)=><option key={app+index}>{app.slice(4).charAt(0).toUpperCase()+app.slice(4).substring(1)}</option>)
+                  apps.map((app,index)=>
+                     <option key={app+index}>
+                        { app.slice(4).charAt(0).toUpperCase()+app.slice(4).substring(1) }
+                     </option>)
                }
             </select>
          </div>
@@ -42,6 +46,8 @@ const Header = () => {
                </div>
             </div>
          </div>
+
+
       </div>
    );
 };
