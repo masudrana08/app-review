@@ -48,7 +48,7 @@ const LeftBar = () => {
             <div>
                <p className="filter-title">Filter by Rating</p>
                <div style={{display:"flex"}}>
-                  <div>
+                  <div onClick={event=>setStore({...store, star:5})}>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star checked"></span>
@@ -59,7 +59,7 @@ const LeftBar = () => {
                </div>
                
                <div style={{display:"flex"}}>
-                  <div>
+                  <div onClick={event=>setStore({...store, star:4})}>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star checked"></span>
@@ -70,7 +70,7 @@ const LeftBar = () => {
                </div>
                
                <div style={{display:"flex"}}>
-                  <div>
+                  <div onClick={event=>setStore({...store, star:3})}>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star checked"></span>
@@ -81,7 +81,7 @@ const LeftBar = () => {
                </div>
                
                <div style={{display:"flex"}}>
-                  <div>
+                  <div onClick={event=>setStore({...store, star:2})}>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star unchecked"></span>
@@ -92,7 +92,7 @@ const LeftBar = () => {
                </div>
                
                <div style={{display:"flex"}}>
-                  <div>
+                  <div onClick={event=>setStore({...store, star:1})}>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star unchecked"></span>
                      <span className="fa fa-star unchecked"></span>
@@ -107,16 +107,16 @@ const LeftBar = () => {
                <p className="filter-title">Filter by version</p>
                {
                   versions.map((data, index)=> {
-                     return <p className="small-p" key={index+"data"}>{data}</p>
+                     return <p onClick={event=>setStore({...store, version:event.target.innerText})} className="small-p" key={index+"data"}>{data}</p>
                   })
                }
             </div>
 
             <div>
-               <p className="filter-title">Filter by country name</p>
+               <p  className="filter-title">Filter by country name</p>
                {
                   countries.map((data, index)=> {
-                     return <p className="small-p" key={index+"data"}>{data}</p>
+                     return <p onClick={event=>setStore({...store, country:event.target.innerText})} className="small-p" key={index+"data"}>{data}</p>
                   })
                }
             </div>

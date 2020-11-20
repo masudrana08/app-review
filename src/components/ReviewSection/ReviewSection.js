@@ -4,25 +4,256 @@ import './ReviewSection.css'
 const jsonData = require("../../review.json")
 const ReviewSection = () => {
    const [currentPage,setCurrentPage]=useState(1)
-   const [store,setStore]=useContext(ReviewContext)
+   const [store]=useContext(ReviewContext)
+   console.log(store.country, store.version)
    useEffect(()=>{
       setCurrentPage(1)
    },[store.searchKey, store.calenderDate])
    const filteredReview = jsonData.filter(data=>{
-      
+ 
       return(
-         store.calenderDate &&  store.searchKey?.length>0?
-            new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
-               && data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1 
-            :data.appID.substring(4)==store.appName.toLowerCase() 
+         //1=search 2=date 3=star 4=version 5=country
+         // five filter start
+         //1,2,3,4,5
+         store.searchKey?.length>0 && store.calenderDate &&  store.star && store.version && store.country 
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1  
+            && new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+            && store.star == data.rating
+            && data.version == store.version 
+            && store.country==data.countryName
+            
+         : data.appID.substring(4)==store.appName.toLowerCase() 
 
+         //four filter start
+         //1,2,3,4
+         &&
+         store.searchKey?.length>0 && store.calenderDate &&  store.star && store.version
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1  
+            && new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+            && store.star == data.rating
+            && data.version == store.version
+         : data.appID.substring(4)==store.appName.toLowerCase()
+
+         //1,2,3,5
+         &&
+         store.searchKey?.length>0 && store.calenderDate &&  store.star && store.country
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1  
+            && new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+            && store.star == data.rating
+            && store.country==data.countryName
+         : data.appID.substring(4)==store.appName.toLowerCase()
+
+         //1,2,4,5
+         && 
+         store.searchKey?.length>0 && store.calenderDate && store.version && store.country 
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1  
+            && new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+            && data.version == store.version 
+            && store.country==data.countryName
+            
+         : data.appID.substring(4)==store.appName.toLowerCase()
+
+         //1,3,4,5
+         && 
+         store.searchKey?.length>0  &&  store.star && store.version && store.country 
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1  
+            && store.star == data.rating
+            && data.version == store.version 
+            && store.country==data.countryName
+            
+         : data.appID.substring(4)==store.appName.toLowerCase()
+
+         //2,3,4,5
+         && 
+         store.calenderDate &&  store.star && store.version && store.country 
+         ? new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+            && store.star == data.rating
+            && data.version == store.version 
+            && store.country==data.countryName
+            
+         : data.appID.substring(4)==store.appName.toLowerCase()
+
+         //three filter start
+         //1,2,3
+         && 
+         store.searchKey?.length>0 && store.calenderDate &&  store.star  
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1  
+            && new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+            && store.star == data.rating
+         : data.appID.substring(4)==store.appName.toLowerCase()
+         
+         //1,2,4
+         && 
+         store.searchKey?.length>0 && store.calenderDate && store.version
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1  
+            && new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+            && data.version == store.version           
+         : data.appID.substring(4)==store.appName.toLowerCase()
+
+         //1,2,5
+         && 
+         store.searchKey?.length>0 && store.calenderDate && store.country 
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1  
+            && new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+            && store.country==data.countryName  
+         : data.appID.substring(4)==store.appName.toLowerCase()
+
+         //1,3,4
+         && 
+         store.searchKey?.length>0  &&  store.star && store.version 
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1  
+            && store.star == data.rating
+            && data.version == store.version  
+         : data.appID.substring(4)==store.appName.toLowerCase()
+
+         //1,3,5
+         && 
+         store.searchKey?.length>0  &&  store.star &&  store.country 
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1 
+            && store.star == data.rating
+            && store.country==data.countryName
+         : data.appID.substring(4)==store.appName.toLowerCase()
+
+         //1,4,5
+         && 
+         store.searchKey?.length>0 && store.version && store.country 
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1  
+            && data.version == store.version 
+            && store.country==data.countryName
+         : data.appID.substring(4)==store.appName.toLowerCase()
+
+         //2,3,4
+         && 
+         store.calenderDate &&  store.star && store.version 
+         ? new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+            && store.star == data.rating
+            && data.version == store.version 
+         : data.appID.substring(4)==store.appName.toLowerCase()
+
+         //2,3,5
+         && 
+         store.calenderDate &&  store.star  && store.country 
+         ? new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+            && store.star == data.rating 
+            && store.country==data.countryName
+         : data.appID.substring(4)==store.appName.toLowerCase()
+
+         //2,4,5
+         && 
+         store.calenderDate  && store.version && store.country 
+         ?  new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+            && data.version == store.version 
+            && store.country==data.countryName 
+         : data.appID.substring(4)==store.appName.toLowerCase()
+
+         //3,4,5
+         && 
+         store.star && store.version && store.country 
+         ? store.star == data.rating
+            && data.version == store.version 
+            && store.country==data.countryName 
+         : data.appID.substring(4)==store.appName.toLowerCase()
+
+         //two filter start
+         //1,2
+         &&
+         store.searchKey?.length>0 && store.calenderDate
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1  
+            && new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)  
+         : data.appID.substring(4)==store.appName.toLowerCase() 
+
+         //1,3
+         && 
+         store.searchKey?.length>0 &&  store.star  
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1  
+            && store.star == data.rating
+         : data.appID.substring(4)==store.appName.toLowerCase() 
+
+         //1,4
+         && 
+         store.searchKey?.length>0 && store.version 
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1  
+            && data.version == store.version 
+         : data.appID.substring(4)==store.appName.toLowerCase() 
+
+         //1,5
+         && 
+         store.searchKey?.length>0  && store.country 
+         ? data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1
+            && store.country==data.countryName
+         : data.appID.substring(4)==store.appName.toLowerCase() 
+
+         //2,3
+         && 
+          store.calenderDate &&  store.star
+         ? new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+            && store.star == data.rating
+         : data.appID.substring(4)==store.appName.toLowerCase() 
+
+         //2,4
+         && 
+         store.calenderDate  && store.version  
+         ? new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+            && data.version == store.version 
+         : data.appID.substring(4)==store.appName.toLowerCase() 
+
+         //2,5
+         && 
+         store.calenderDate && store.country 
+         ? new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
+            && store.country==data.countryName
+         : data.appID.substring(4)==store.appName.toLowerCase() 
+
+         //3,4
+         && 
+         store.star && store.version 
+         ? store.star == data.rating
+            && data.version == store.version 
+         : data.appID.substring(4)==store.appName.toLowerCase() 
+
+         //3,5
+         &&
+         store.star &&  store.country 
+         ? store.star == data.rating
+            && store.country==data.countryName
+         : data.appID.substring(4)==store.appName.toLowerCase() 
+
+         //4,5
+         && 
+         store.version && store.country 
+         ? data.version == store.version 
+            && store.country==data.countryName
+         : data.appID.substring(4)==store.appName.toLowerCase() 
+
+
+
+
+               // only one thing filter
             &&
             store.searchKey?.length>0 ? 
                data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1 
                :data.appID.substring(4)==store.appName.toLowerCase() 
+            
+            &&
+            store.calenderDate 
+            ? new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11) 
+            :data.appID.substring(4)==store.appName.toLowerCase() 
+            
             && 
-            store.calenderDate ? new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11) 
-               :data.appID.substring(4)==store.appName.toLowerCase() 
+            store.version
+            ? data.version == store.version
+            : data.appID.substring(4)==store.appName.toLowerCase() 
+
+            && 
+            store.country
+            ?store.country==data.countryName
+            :data.appID.substring(4)==store.appName.toLowerCase()
+            
+            && 
+            store.star
+            ?store.star == data.rating
+            :data.appID.substring(4)==store.appName.toLowerCase()
+
            
       )
    })
