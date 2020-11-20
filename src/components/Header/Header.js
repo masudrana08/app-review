@@ -16,7 +16,7 @@ const Header = () => {
 
          <div >
             <p className="my-label">select products</p>
-            <select onChange={(event)=>setStore({...store, appName:event.target.value})} name="appName" id="appName">
+            <select className="select-product" onChange={(event)=>setStore({...store, appName:event.target.value})} name="appName" id="appName">
                {
                   apps.map((app,index)=>
                      <option key={app+index}>
@@ -30,7 +30,7 @@ const Header = () => {
             <div style={{ display:"flex"}} >
                <div >
                   <p className="my-label">sorting</p>
-                  <select onChange={(event)=>setStore({...store, sortBy:event.target.value})} name="sortByTime" id="sortByTime">
+                  <select className="select-option" onChange={(event)=>setStore({...store, sortBy:event.target.value})} name="sortByTime" id="sortByTime">
                      <option value="newest">Newest First</option>
                      <option value="oldest">Oldest First</option>
                   </select>
@@ -38,7 +38,7 @@ const Header = () => {
 
                <div style={{marginLeft:"10px"}}>
                   <p className="my-label">translation</p>
-                  <select name="language" id="language">
+                  <select className="select-option" name="language" id="language">
                      <option>English</option>
                      <option>Bangla</option>
                      <option>Hindi</option>

@@ -5,22 +5,24 @@ const jsonData = require("../../review.json")
 const ReviewSection = () => {
    const [currentPage,setCurrentPage]=useState(1)
    const [store,setStore]=useContext(ReviewContext)
-
+   useEffect(()=>{
+      setCurrentPage(1)
+   },[store.searchKey, store.calenderDate])
    const filteredReview = jsonData.filter(data=>{
       
       return(
          store.calenderDate &&  store.searchKey?.length>0?
             new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
                && data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1 
-            :data.appID.substring(4)==store.appName.toLowerCase()
+            :data.appID.substring(4)==store.appName.toLowerCase() 
 
             &&
             store.searchKey?.length>0 ? 
-               data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1
-               :data.appID.substring(4)==store.appName.toLowerCase()
+               data.reviewHeading.toLowerCase().indexOf(store.searchKey?.toLowerCase()) != -1 
+               :data.appID.substring(4)==store.appName.toLowerCase() 
             && 
-            store.calenderDate ? new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11)
-               :data.appID.substring(4)==store.appName.toLowerCase()
+            store.calenderDate ? new Date(store.calenderDate).toUTCString().slice(5,16) == data.reviewDate.slice(0,11) 
+               :data.appID.substring(4)==store.appName.toLowerCase() 
            
       )
    })
@@ -37,23 +39,24 @@ const ReviewSection = () => {
    }
    return (
       <div className="main-review-section">
-         viewing {
-               (currentPage-1) * 10 + 1} - 
-            {
+         <p>
+            viewing {
+               (currentPage-1) * 10 + 1} - {
                currentPage * 10 < filteredReview.length
                ? currentPage * 10
                : filteredReview.length
-            } 
-         of {filteredReview.length} Reviews
+            } of {filteredReview.length} Reviews
+         </p>
+
          {
             sorted.slice(
                (currentPage-1) * 10 + 1, currentPage * 10
             ).map(reviewData=>{
                return( 
-                  <div key={ reviewData.id }>
+                  <div className="reviewData-component" key={ reviewData.id }>
                      
                      <div style={{ display:"flex" }}>
-                        <h3 style={{ margin:0, padding:0 }}>{ reviewData.reviewHeading }</h3>
+                        <h3 className="review-title">{ reviewData.reviewHeading }</h3>
                         {
                            reviewData.rating == 5 &&
                            <div >
@@ -96,13 +99,15 @@ const ReviewSection = () => {
                         }
                      </div>
 
-                     <p>{ reviewData.reviewText }</p>
-                     <div style={{ display:"flex" }}>
-                        <p>by { reviewData.reviewUserName }</p>
-                        <p style={{ marginLeft:"5px" }}>{ reviewData.reviewDate }</p>
-                        <p style={{ marginLeft:"5px" }}>{ reviewData.version }</p>
-                        <p style={{ marginLeft:"5px" }}>{ reviewData.countryName }</p>
+                     <p className="review-text">{ reviewData.reviewText }</p>
+                     <div className="reviewData-bottom-section">
                         <div style={{ display:"flex" }}>
+                           <p>by { reviewData.reviewUserName }</p>
+                           <p>{ reviewData.reviewDate }</p>
+                           <p>{ reviewData.version }</p>
+                           <p>{ reviewData.countryName }</p>
+                        </div>
+                        <div style={{ display:"flex"}}>
                            <p>reply</p>
                            <p>share</p>
                         </div>
@@ -112,37 +117,40 @@ const ReviewSection = () => {
                )
             })
          }
-         <div>
-            <span onClick={ event=>pageHandler(currentPage-1) }>Prev</span>
-            <span onClick={ event=>pageHandler(event) }>
+
+         {/* pagination of total review */}
+
+         <div className="pagination-container">
+            <span className="pagination-button" onClick={ event=>pageHandler(currentPage-1) }>Prev</span>
+            <span className="pagination-button" onClick={ event=>pageHandler(event) }>
                {
                   Number(currentPage)+3<Math.ceil(filteredReview.length/10)
                   ? Number(currentPage)
                   : Math.ceil(filteredReview.length/10-4)
                } 
             </span>
-            <span onClick={event=>pageHandler(event)}>
+            <span className="pagination-button" onClick={event=>pageHandler(event)}>
                {
                   Number(currentPage)+3<Math.ceil(filteredReview.length/10)
                   ? Number(currentPage)+1
                   : Math.ceil(filteredReview.length/10-3)
                } 
             </span>
-            <span onClick={event=>pageHandler(event)}>
+            <span className="pagination-button" onClick={event=>pageHandler(event)}>
                {
                   Number(currentPage)+3<Math.ceil(filteredReview.length/10)
                   ? Number(currentPage)+2
                   : Math.ceil(filteredReview.length/10-2)
                } 
             </span>
-            .....
-            <span onClick={event=>pageHandler(event)}>
+            _ _
+            <span className="pagination-button" onClick={event=>pageHandler(event)}>
                {Math.ceil(filteredReview.length/10-1)} 
             </span>
-            <span onClick={event=>pageHandler(event)}>
+            <span className="pagination-button" onClick={event=>pageHandler(event)}>
                {Math.ceil(filteredReview.length/10)} 
             </span>
-            <span onClick={(event)=>pageHandler(currentPage+1)}>
+            <span className="pagination-button" onClick={(event)=>pageHandler(currentPage+1)}>
                Next
             </span>
          </div>

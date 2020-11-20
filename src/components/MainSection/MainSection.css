@@ -5,13 +5,13 @@
    width:25%;
    height:100vh;
    position:fixed;
-   top:70px;
+   top:110px;
    left:10%;
 }
 .review-section-container{
    position:relative;
    left:31%;
-   top: 70px;
+   top: 90px;
    z-index:-5;
    width:69%;
 }

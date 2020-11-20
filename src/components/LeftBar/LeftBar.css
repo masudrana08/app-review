@@ -24,3 +24,30 @@
    outline:1px solid lightblue;;
 
 }
+
+.date-calender{
+   border: none;
+   border: 1px solid lightgray;
+   border-radius: 5px;
+   padding: 5px; 
+   width: 220px;
+   margin-top: 10px;
+   color: rgb(65, 64, 64);
+   font-weight: 500;
+   outline: none;
+   
+}
+.date-calender:focus{
+   outline: 1px solid lightblue;
+}
+.minus-button{
+   margin-left: 10px;
+   color: rgba(109, 107, 107, 0.851);
+   font-size: 24px;
+   padding-top:10px;
+}
+.calender-section{
+   display:flex;
+   align-items: center;
+   
+}

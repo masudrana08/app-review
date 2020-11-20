@@ -6,11 +6,37 @@
   height:70px;
   background:white;
   width:80%;
-
-
+  border-bottom: 1px solid rgba(179, 177, 177, 0.512);
+  padding-bottom: 20px;
 }
 .my-label{
    margin:0;
    padding:10px 0 2px 0;
    font-size:14px;
+   color: rgba(95, 94, 94, 0.853);
+   font-weight:500;
+}
+
+.select-product{
+  border-radius: 5px;
+  border: none;
+  border: 1px solid lightgray;
+  padding:5px 20px;
+  width: 300px;
+  color: rgb(68, 66, 66);
+  font-weight:700;
+  outline: none;
+}
+.select-product option{
+  color: rgb(100, 98, 98);
+  font-size: 14px;
+
+}
+
+.select-option{
+  border: none;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 2px 5px;
+  color: rgb(90, 88, 88);
 }
