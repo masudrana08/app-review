@@ -14,7 +14,7 @@ const Header = () => {
    return (
       <div className="header-container">
 
-         <div >
+         <div className="select-product-container">
             <p className="my-label">select products</p>
             <select className="select-product" onChange={(event)=>setStore({...store, appName:event.target.value})} name="appName" id="appName">
                {
@@ -26,7 +26,7 @@ const Header = () => {
             </select>
          </div>
 
-         <div>
+         <div className="sorting-container">
             <div style={{ display:"flex"}} >
                <div >
                   <p className="my-label">sorting</p>

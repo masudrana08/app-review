@@ -54,6 +54,15 @@
    
 }
 
+.counted-item{
+   margin:0;
+   padding:0;
+   font-size: 14px;
+   width: 100px;
+   padding-left: 10px;
+   color:rgb(68, 67, 67);
+   letter-spacing: 1.2px;
+}
 .small-p{
    margin:0;
    padding:0;
@@ -83,4 +92,22 @@
 .rating-star{
    display:flex;
    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 1023px){
+   .leftbar-main-container {
+      display:grid;
+      grid-template-columns: auto auto;
+   }
+   
+}
+@media only screen and (max-width: 500px){
+   
+   .leftbar-main-container {
+      display:block;
+   }
+   .leftbar-main-container p{
+      font-size: 16px;
+   }
 }

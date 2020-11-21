@@ -54,22 +54,26 @@ const LeftBar = () => {
    })
   
    return (
-      <div >
+      <div className="leftbar-main-container">
          
-            <input onChange={ (event)=>setStore({ ...store, searchKey:event.target.value }) }
-               className="search-input" type="text" placeholder="search"/>
-            <div className="calender-section">
-               <input value={store.calenderDate} type="date" className="date-calender"
-                  onChange={ (event)=>setStore({ ...store,calenderDate:event.target.value }) }  />
+            <div>
+               <input onChange={ (event)=>setStore({ ...store, searchKey:event.target.value }) }
+                  className="search-input" type="text" placeholder="search"/>
+               <div className="calender-section">
+                  <input value={store.calenderDate} type="date" className="date-calender"
+                     onChange={ (event)=>setStore({ ...store,calenderDate:event.target.value }) }  />
 
-               <i style={{ cursor:"pointer" }} onClick={ ()=>setStore({...store,calenderDate:""}) } 
-                  class="fa fa-minus-square minus-button"></i>
+                  <i style={{ cursor:"pointer" }} onClick={ ()=>setStore({...store,calenderDate:""}) } 
+                     class="fa fa-minus-square minus-button"></i>
+               </div>
             </div>
 
       {/* start rating filter */}
+         <div>
             <div>
                <p className="filter-title">Filter by Rating</p>
                <div className="rating-star">
+               
                   <div onClick={event=>setStore({...store, star:5})}>
                      <span className="fa fa-star checked"></span>
                      <span className="fa fa-star checked"></span>
@@ -125,14 +129,16 @@ const LeftBar = () => {
                </div>
                
             </div>
+         </div>
 
+{/* start version and country filter */}
             <div>
                <p className="filter-title">Filter by version</p>
                {
                   versions.map((data, index)=> {
                      return <div style={{margin:0, padding:0, display:"flex"}} >
                         <p onClick={event=>setStore({...store, version:event.target.innerText})} className="small-p" key={index+"data"}>{data}</p>
-                        <p className="small-p" >{versionCollection[index].length}</p>
+                        <p className="counted-item" >{versionCollection[index].length}</p>
                      </div>
                   })
                }
@@ -144,7 +150,7 @@ const LeftBar = () => {
                   countries.map((data, index)=> {
                      return <div style={{margin:0, padding:0, display:"flex"}} >
                               <p onClick={event=>setStore({...store, country:event.target.innerText})} className="small-p" key={index+"data"}> {data} </p>
-                              <p className="small-p" >{countryCollection[index].length}</p>
+                              <p className="counted-item" >{countryCollection[index].length}</p>
                            </div>
                   })
                }
