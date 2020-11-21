@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ReviewContext } from '../../App';
 import './LeftBar.css'
 const jsonData = require("../../review.json")
@@ -8,7 +8,6 @@ const LeftBar = () => {
    const versions = []
    const countries =[]
 
-  
    jsonData.forEach(data=>{
       if(store.appName.toLowerCase() == data.appID.substring(4)){
          if(data.rating==5){
@@ -27,10 +26,33 @@ const LeftBar = () => {
       if(!versions.includes(data.version)){
          versions.push(data.version)
       }
+
       if(!countries.includes(data.countryName)){
          countries.push(data.countryName)
       }
    })
+
+   let versionCollection =[]
+   let countryCollection =[]
+   
+   versions.forEach((version,index)=>{
+     versionCollection.push([])
+     jsonData.forEach((data)=>{
+      if( data.version == version && data.appID.substring(4) == store.appName.toLowerCase()){
+         versionCollection[index].push(version)
+      }
+   })
+})
+   
+   countries.forEach((country,index)=>{
+     countryCollection.push([])
+     jsonData.forEach((data)=>{
+      if( data.countryName == country && data.appID.substring(4) == store.appName.toLowerCase()){
+         countryCollection[index].push(country)
+      }
+     })
+   })
+  
    return (
       <div >
          
@@ -108,7 +130,10 @@ const LeftBar = () => {
                <p className="filter-title">Filter by version</p>
                {
                   versions.map((data, index)=> {
-                     return <p onClick={event=>setStore({...store, version:event.target.innerText})} className="small-p" key={index+"data"}>{data}</p>
+                     return <div style={{margin:0, padding:0, display:"flex"}} >
+                        <p onClick={event=>setStore({...store, version:event.target.innerText})} className="small-p" key={index+"data"}>{data}</p>
+                        <p className="small-p" >{versionCollection[index].length}</p>
+                     </div>
                   })
                }
             </div>
@@ -117,7 +142,10 @@ const LeftBar = () => {
                <p  className="filter-title">Filter by country name</p>
                {
                   countries.map((data, index)=> {
-                     return <p onClick={event=>setStore({...store, country:event.target.innerText})} className="small-p" key={index+"data"}>{data}</p>
+                     return <div style={{margin:0, padding:0, display:"flex"}} >
+                              <p onClick={event=>setStore({...store, country:event.target.innerText})} className="small-p" key={index+"data"}> {data} </p>
+                              <p className="small-p" >{countryCollection[index].length}</p>
+                           </div>
                   })
                }
             </div>
