@@ -281,7 +281,7 @@ const ReviewSection = () => {
 
          {
             sorted.slice(
-               (currentPage-1) * 10 + 1, currentPage * 10
+               (currentPage-1) * 10, currentPage * 10
             ).map(reviewData=>{
                return( 
                   <div className="reviewData-component" key={ reviewData.id }>
@@ -357,26 +357,28 @@ const ReviewSection = () => {
                {
                   Number(currentPage)+3<Math.ceil(filteredReview.length/10)
                   ? Number(currentPage)
-                  : Math.ceil(filteredReview.length/10-4)
+                  : Math.ceil(filteredReview.length/10-4) && Math.ceil(filteredReview.length/10-4)>0
                } 
             </span>
             <span className="pagination-button" onClick={event=>pageHandler(event)}>
                {
                   Number(currentPage)+3<Math.ceil(filteredReview.length/10)
                   ? Number(currentPage)+1
-                  : Math.ceil(filteredReview.length/10-3)
+                  : Math.ceil(filteredReview.length/10-3)  && Math.ceil(filteredReview.length/10-3)>0
                } 
             </span>
             <span className="pagination-button" onClick={event=>pageHandler(event)}>
                {
                   Number(currentPage)+3<Math.ceil(filteredReview.length/10)
                   ? Number(currentPage)+2
-                  : Math.ceil(filteredReview.length/10-2)
+                  : Math.ceil(filteredReview.length/10-2)  && Math.ceil(filteredReview.length/10-2)>0
                } 
             </span>
             _ _
             <span className="pagination-button" onClick={event=>pageHandler(event)}>
-               {Math.ceil(filteredReview.length/10-1)} 
+               {
+                  Math.ceil(filteredReview.length/10-1) 
+               } 
             </span>
             <span className="pagination-button" onClick={event=>pageHandler(event)}>
                {Math.ceil(filteredReview.length/10)} 
