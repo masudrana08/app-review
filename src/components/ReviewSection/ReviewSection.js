@@ -287,6 +287,7 @@ const ReviewSection = () => {
                   <div className="reviewData-component" key={ reviewData.id }>
                      
                      <div style={{ display:"flex" }}>
+                        
                         <h3 className="review-title">{ reviewData.reviewHeading }</h3>
                         {
                            reviewData.rating == 5 &&
@@ -356,7 +357,7 @@ const ReviewSection = () => {
             <span className="pagination-button" onClick={ event=>pageHandler(event) }>
                {
                   Number(currentPage)+3<Math.ceil(filteredReview.length/10)
-                  ? Number(currentPage)
+                  ? Number(currentPage) 
                   : Math.ceil(filteredReview.length/10-4) && Math.ceil(filteredReview.length/10-4)>0
                } 
             </span>
@@ -381,7 +382,7 @@ const ReviewSection = () => {
                } 
             </span>
             <span className="pagination-button" onClick={event=>pageHandler(event)}>
-               {Math.ceil(filteredReview.length/10)} 
+               {Math.ceil(filteredReview.length/10) }  
             </span>
             <span className="pagination-button" onClick={(event)=>pageHandler(currentPage+1)}>
                Next
