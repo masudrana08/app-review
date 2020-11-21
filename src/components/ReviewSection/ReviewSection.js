@@ -286,8 +286,9 @@ const ReviewSection = () => {
                return( 
                   <div className="reviewData-component" key={ reviewData.id }>
                      
-                     <div style={{ display:"flex" }}>
-                        
+                     <div style={{ display:"flex", alignItems:"center" }}>
+                        <p className="app-color"></p>
+                        <p className="app-store">{reviewData.appStoreName}</p>
                         <h3 className="review-title">{ reviewData.reviewHeading }</h3>
                         {
                            reviewData.rating == 5 &&
