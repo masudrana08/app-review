@@ -259,8 +259,9 @@ const ReviewSection = () => {
    })
 
    let sorted = store.sortBy == "newest" 
-         ? filteredReview.sort((first,second)=>Date.parse(first.reviewDate)-Date.parse(second.reviewDate)) 
-         : filteredReview.sort((first,second)=>Date.parse(second.reviewDate)-Date.parse(first.reviewDate))
+         ? filteredReview.sort((first,second)=>Date.parse(second.reviewDate)-Date.parse(first.reviewDate))
+         : filteredReview.sort((first,second)=>Date.parse(first.reviewDate)-Date.parse(second.reviewDate)) 
+        
 
    
    const pageHandler = (event)=>{
